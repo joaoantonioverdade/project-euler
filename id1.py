@@ -23,6 +23,11 @@ def multiples(number, maximum):
 def multiples2(number, maximum):
 	"""
 	Expliciting using a mathematical thinking procedure
+
+	In mathematics, a multiple is the product of any quantity and an integer.
+	In other words, for the quantities a and b, we say that b is a multiple 
+	of a if b = na for some integer n, which is called the multiplier or 
+	coefficient.
 	"""
 
 	multiples_list = []
