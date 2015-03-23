@@ -15,19 +15,19 @@ of the numbers from 1 to 20?
 import sys
 
 def no_remainder(total_divisible):
-	n = 1
+	n = total_divisible[0]
 	while True:
 
-		for i in total_divisible: #range(1,total_divisible + 1):
+		for i in total_divisible: 
 
 			if(n % i) != 0:
 				break
-			
-			if i == len(total_divisible):
+
+			if i == total_divisible[-1]:
 				return n
 
-		n += 1
-
+		n += 20
+		
 if __name__ == "__main__":
 	print(no_remainder([20,19,18,17,16,15,14,13,12,11]))
 
