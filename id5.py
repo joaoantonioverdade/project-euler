@@ -26,18 +26,12 @@ def no_remainder(total_divisible):
 			if i == total_divisible[-1]:
 				return n
 
+		# We can increment by the largest multiple saving us time
 		n += 20
 		
 if __name__ == "__main__":
+	# If its divisible by 20 its by 10 and 5 also
+	# If its divisible by 18 its by 9
+	# If its divisible by 16 its bu 8 and 4 and 2 ...
 	print(no_remainder([20,19,18,17,16,15,14,13,12,11]))
 
-#20 10 5
-#19 8 4 2 1
-#18 9 3 
-#17
-#16 8
-#15 5
-#14 7
-#13
-#12 6 3 
-#11

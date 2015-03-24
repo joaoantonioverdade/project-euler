@@ -17,9 +17,10 @@ import math
 import sys
 
 def number_places(n):
-	
-	# TODO: find a better way
-	# really ugly extraction of unity cases
+	"""
+	Really ugly extraction of unity cases to a list
+	"""
+
 	bases = []
 	while n >= 10:
 				
@@ -35,36 +36,60 @@ def number_places(n):
 
 	return list(reversed(bases))
 
+def check_palindrome(number):
+	places = number_places(number)
+
+	# check for palindrome
+	palindrome = True 
+	for i in range(math.trunc(len(places) / 2)):
+
+		# can also be done using the reverse number and doing a 
+		# comparison
+		left = i
+		right = len(places) - i - 1
+		if(places[left] != places[right]):
+			palindrome = False
+
+	return palindrome
+
 def largest_palindrome(min,max):
 
 	max += 1
 
-	palindromes = []
+	highest_palindrome = 0
 	# for each two 3-digit number product
 	for left_number in reversed(range(min,max)):
 		for right_number in reversed(range(min,max)):
 			
 			product = left_number * right_number
-
-			# get number with each numerical place in a list
-			places = number_places(product)
-
-			# check for palindrome
-			palindrome = True 
-			for i in range(math.trunc(len(places) / 2)):
-
-				# TODO: there must be a better way
-				left = i
-				right = len(places) - i - 1
-				if(places[left] != places[right]):
-					palindrome = False
+			
+			# palindrome = check_palindrome(product)
+			# palindrome = (reverse(product) == product)
+			palindrome = (reverse2(product) == product)
 
 			if palindrome:
-				print(str(left_number) + "*" + str(right_number) + "=" + str(product))
-				palindromes.append(product)
+				if(highest_palindrome < product):
+					highest_palindrome = product
 
-	print(sorted(list(set(palindromes))))
+	return highest_palindrome
+
+def reverse(num):
+  rev = 0
+  while(num > 0):
+    
+    rev = (10 * rev) + num % 10
+
+    # floor division
+    num = num // 10
+
+  return rev
+
+def reverse2(num):
+  return int(str(num)[::-1])
 
 if __name__ == "__main__":
-	largest_palindrome(100,999)
+	print(largest_palindrome(100,999))
+
+
+
 
