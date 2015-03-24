@@ -39,7 +39,6 @@ def multiples2(number, maximum):
 
 	return multiples_list
 
-# TODO: understand these wrapper use for timeit	
 # http://www.pythoncentral.io/time-a-python-function/
 def wrapper(func, *args, **kwargs):
 	def wrapped():
