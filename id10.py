@@ -12,6 +12,45 @@ Find the sum of all the primes below two million.
 
 
 import math
+import timeit
+
+
+def sieve_eratosthenes(maximum):
+    """
+    The basic idea behind this ancient method is that instead of looking for
+    divisors d of n, we mark multiples of d as composites. Since every
+    composite has a prime divisor, the marking of multpiples need only be done
+    for primes
+    """
+
+    N = maximum
+    prime = []
+    crossed = []
+
+    for n in range(2, N):
+        if n not in crossed:
+            prime.append(n)
+
+            if n > math.sqrt(N):
+                for p in range(n + 1, N):
+                    if p not in crossed:
+                        prime.append(p)
+
+                return prime
+
+            for m in range(2, N):
+                mult = n * m
+                if mult < N:
+                    crossed.append(mult)
+
+
+def primes(maximum):
+    prime = []
+    for n in range(maximum):
+        if is_prime(n):
+            prime.append(n)
+
+    return prime
 
 
 def is_prime(number):
@@ -38,7 +77,28 @@ def is_prime(number):
     return True
 
 
+def wrapper(func, *args, **kwargs):
+    def wrapped():
+        return func(*args, **kwargs)
+    return wrapped
+
+
+def find_fastest():
+    """
+    Measure functions time of processing
+    """
+
+    wrapped = wrapper(primes, 2000000)
+    wrapped2 = wrapper(sieve_eratosthenes, 2000000)
+
+    print("-----Taking times-----")
+    print("->First function:")
+    print(timeit.timeit(wrapped, number=1))
+    print("->Second function:")
+    print(timeit.timeit(wrapped2, number=1))
+
 if __name__ == "__main__":
+    # find_fastest()
 
     max_prime = 2000000
     sum_primes = 0
