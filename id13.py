@@ -211,9 +211,10 @@ data.append(72107838435069186155435662884062257473692284509516)
 data.append(20849603980134001723930671666823555245252804609722)
 data.append(53503534226472524250874054075591789781264330331690)
 
-def simple_sum():
-	print(str(sum(number for number in data))[:10])
 
-	
+def simple_sum():
+    print(str(sum(number for number in data))[:10])
+
+
 if __name__ == "__main__":
-	print(simple_sum())
+    print(simple_sum())
