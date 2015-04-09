@@ -12,21 +12,23 @@ https://projecteuler.net/project/images/p015.gif
 How many such routes are there through a 20×20 grid?
 """
 
-import math
-
 
 def find_routes(columns):
-
-    if columns == 1:
-        return 2
-
-    return find_routes(columns - 1) + (math.pow(columns, 2) - math.pow(columns - 1, 2) - 1) * 2
+    pass
 
 if __name__ == "__main__":
-    # (1x1)     1 square    -> 2 routes
-    # (2x2)     4 squares   -> 2 + 2 + 2 - 2 routes (6)
-    # (3x3)     9 squares   -> (20)
-    # (4x4)     16 squares  -> (70)
-    # (nxn)     m squares   -> (n-1 routes) + (n*n - n-1 * n-1 - 1) * 2
-    for n in range(1, 4):
-        print(n, "->", find_routes(n))
+    # for each column/row there are two choices Right or Down
+    # the maximum steps of the path is the number of columns/rows
+    # multiplied by 2
+    # it these path we can choose evenly a number of Rights and Downs
+    #
+    # for 20 columns/rows it implies a max of 20 * 2 steps in the path
+    # the evenly combination of 20 rights and 20 lefts is found using
+    # the following permutation:
+    # n! / n1! * n2!
+    # n = 40, n1 = 20, n2 = 20
+    # 40! / 20! * 20! = answer
+    #
+    # for the math permutation fundamental:
+    # http://www.intmath.com/counting-probability/3-permutations.php
+    pass
