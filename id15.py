@@ -13,8 +13,14 @@ How many such routes are there through a 20×20 grid?
 """
 
 
+import math
+
+
 def find_routes(columns):
-    pass
+    maximum_steps = columns * 2
+    permutations = math.factorial(maximum_steps)\
+        / math.pow(math.factorial(columns), 2)
+    return permutations
 
 if __name__ == "__main__":
     # for each column/row there are two choices Right or Down
@@ -31,4 +37,5 @@ if __name__ == "__main__":
     #
     # for the math permutation fundamental:
     # http://www.intmath.com/counting-probability/3-permutations.php
-    pass
+
+    print(find_routes(20))
