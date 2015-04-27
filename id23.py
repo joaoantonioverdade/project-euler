@@ -1,4 +1,4 @@
-#! /usr/local/bin/python3
+#! /usr/bin/python3.4
 # -*- coding: utf-8 -*-
 
 """
@@ -25,8 +25,6 @@ sum of two abundant numbers.
 
 """
 
-import sys
-
 
 def sum_proper_divisors_slow(number):
     "Sum of proper divisors of n"
@@ -35,20 +33,21 @@ def sum_proper_divisors_slow(number):
 
 def sum_proper_divisors(number):
     "Sum of proper divisors of n"
-    return sum([n for n in range(1, number / 2 + 1) if number % n == 0])
+    return sum([n for n in range(1, number // 2 + 1) if number % n == 0])
+
 
 if __name__ == "__main__":
 
     abundant = []
-    total = 28124
+    total = 28123
     for number in range(1, total):
         if sum_proper_divisors(number) > number:
             abundant.append(number)
 
-    print("Found", len(abundant), "abundant numbers...")  # , abundant)
+    print("Found", len(abundant), "abundant numbers...")
 
     abundant_sums = []
-    candidates = range(1, total)
+    candidates = list(range(1, total))
 
     for idx, p1 in enumerate(abundant):
         for idx2, p2 in enumerate(abundant):
@@ -60,22 +59,5 @@ if __name__ == "__main__":
 
             if psum > total:
                 break
-        print(len(abundant), idx)
+
     print(sum(candidates))
-
-    sys.exit()
-
-    print("Found all sums", len(abundant_sums))  # , abundant_sums)
-
-    abundant_sums = set(abundant_sums)
-
-    print("Unique...")
-
-    positive_integers_not_sum = 0
-    for number in range(1, total):
-
-        if number not in abundant_sums:
-            positive_integers_not_sum += number
-            # print(number)
-
-    print(positive_integers_not_sum)
