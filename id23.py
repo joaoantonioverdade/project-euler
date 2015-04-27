@@ -38,26 +38,31 @@ def sum_proper_divisors(number):
 
 if __name__ == "__main__":
 
-    abundant = []
-    total = 28123
+    abundant = set()
+    total = 28124
+
     for number in range(1, total):
         if sum_proper_divisors(number) > number:
-            abundant.append(number)
+            abundant.add(number)
 
-    print("Found", len(abundant), "abundant numbers...")
+    abundant_sorted = sorted(abundant)
+    count_sum = 0
 
-    abundant_sums = []
-    candidates = list(range(1, total))
+    for number in range(1, total):
 
-    for idx, p1 in enumerate(abundant):
-        for idx2, p2 in enumerate(abundant):
-            psum = p1 + p2
+        print(number)
 
-            if psum <= total:
-                if psum in candidates:
-                    candidates.remove(psum)
+        in_ab = False
+        for ab in abundant_sorted:
 
-            if psum > total:
+            if ab > number // 2:
                 break
 
-    print(sum(candidates))
+            if (number - ab) in abundant_sorted:
+                in_ab = True
+                break
+
+        if in_ab is False:
+            count_sum += number
+
+    print(count_sum)
