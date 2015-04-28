@@ -28,6 +28,40 @@ in its decimal fraction part.
 
 
 import re
+import sys
+
+
+def long_division(number):
+
+    counter = 0
+
+    numerator = 1
+    denominator = number
+    remainder = []
+    result = ""
+
+    while True:
+
+        if numerator < denominator:
+
+            numerator *= 10
+
+        r = numerator % denominator
+
+        if r in remainder:
+            break
+
+        remainder.append(numerator % denominator)
+        result += str(int(numerator/denominator))
+
+        numerator = remainder[-1]
+        counter += 1
+
+        if remainder[-1] == 0:
+            break
+
+    return result
+
 
 # https://en.wikipedia.org/wiki/Repeating_decimal
 # https://en.wikipedia.org/wiki/Cyclic_number
@@ -36,13 +70,9 @@ if __name__ == "__main__":
     longest_recurring = 0
     recurring = re.compile(r'(\d+?)\1+')
 
-    for d in range(2, 1000):
-        value = str(1 / d)[2:]
+    for n in range(2, 1000):
+        cyclic = long_division(n)
 
-        result = recurring.search(value)
-        if result:
-            if value.count(result.group(1)) >= longest_recurring:
-                longest_recurring = value.count(result.group(1))
-            print(d, value, result.groups(), len(result.group(1)), value.count(result.group(1)) )
-
-    print(longest_recurring)
+        if(len(cyclic) > longest_recurring):
+            print(n, len(cyclic))
+            longest_recurring = len(cyclic)
