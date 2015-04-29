@@ -28,7 +28,6 @@ in its decimal fraction part.
 
 
 import re
-import sys
 
 
 def long_division(number):
