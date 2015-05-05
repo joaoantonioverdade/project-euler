@@ -18,6 +18,7 @@ How many different ways can £2 be made using any number of coins?
 import itertools
 
 
+# Brute force takes ages...
 def pounds_to_pence(pounds):
 
     find_pence = pounds * 100
@@ -37,12 +38,30 @@ def pounds_to_pence(pounds):
     counter = 0
     for comb in itertools.product(*hypothesis_range):
 
-        # print(comb)
         if sum(p * m for p, m in zip(pence, comb)) == find_pence:
             counter += 1
 
     # plus the 200 pences coin
     print(counter + 1)
 
+
+pence = [200, 100, 50, 20, 10, 5, 2, 1]
+
+
+# much faster
+def recursion_pounds_to_pence(money, max_coin):
+    coin_sum = 0
+    if max_coin == 7:
+        return 1
+
+    for i in range(max_coin, 8):
+        if (money - pence[i] == 0):
+            coin_sum += 1
+        if (money - pence[i] > 0):
+            coin_sum += recursion_pounds_to_pence(money - pence[i], i)
+
+    return coin_sum
+
 if __name__ == "__main__":
-    pounds_to_pence(2)
+    # pounds_to_pence(2)
+    print(recursion_pounds_to_pence(5*100, 0))
