@@ -21,7 +21,7 @@ find the value of the denominator.
 
 # note: one should remove a COMMON digit in both the nominator and the
 # denominator.
-
+# Brute force again...
 if __name__ == "__main__":
 
     for first in range(10, 99):
@@ -33,12 +33,23 @@ if __name__ == "__main__":
 
             if res < 1:
 
-                for fidx, f in enumerate(fstr):
-                    for sidx, s in enumerate(sstr):
+                fidx = list(fstr[:])
+                sidx = list(sstr[:])
 
-                        if int(s) == 0:
+                for f in fidx:
+                    if f in sidx:
+
+                        if f == '0':
                             continue
 
-                        sres = int(f) / int(s)
+                        fidx.remove(f)
+                        sidx.remove(f)
+
+                        if int(''.join(sidx[:])) == 0:
+                            continue
+
+                        sres = int(''.join(fidx)) / int(''.join(sidx[:]))
                         if sres == res:
-                            print(first, second, f, s, res, sres, fidx, sidx)
+                            print(first, second, fidx, sidx, res, sres)
+
+#  0.25 * 0.2 * 0.4 * 0.5 = 0.01 = 1/100 (nom/denom) denom = 100
