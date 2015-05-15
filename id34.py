@@ -24,7 +24,11 @@ if __name__ == "__main__":
     print(fact)
 
 
-    for n in range(3, 10000000):
+    # upper bound = 9! * 7 -> 7 decimal places
+    #               9! * 8 -> 7 decimal places (invalid)
+
+    upper_bound = math.factorial(9) * 7
+    for n in range(3, upper_bound):
 
         nstr = str(n)
 
@@ -34,8 +38,3 @@ if __name__ == "__main__":
 
         if n == sum_fact:
             print(n, sum_fact)
-
-    # 3
-    # 3 in fact? no
-
-    pass
