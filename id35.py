@@ -14,7 +14,6 @@ How many circular primes are there below one million?
 
 import math
 import itertools
-import sys
 
 
 def is_prime(number):
@@ -42,6 +41,17 @@ def is_prime(number):
 
     return True
 
+
+def rotate_string(string):
+
+    rotations = set()
+    for n in range(len(string)):
+
+        string = string[1:] + string[0]
+        rotations.add(string)
+
+    return list(rotations)
+
 if __name__ == "__main__":
 
     primes = set()
@@ -60,7 +70,7 @@ if __name__ == "__main__":
                 n_str = str(n)
 
                 perms = []
-                for p in itertools.permutations(n_str, len(n_str)):
+                for p in rotate_string(n_str):
 
                     p_str = ''.join(p)
                     if p_str[0] != "0":
