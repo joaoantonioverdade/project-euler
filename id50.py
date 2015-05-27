@@ -18,6 +18,7 @@ consecutive primes?
 
 import math
 
+
 def is_prime(number):
     """
     A slow prime checker function
