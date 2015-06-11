@@ -23,35 +23,29 @@ with more digits than denominator?
 """
 
 
-import fractions
-
-
-# too much recursion for python...
-def get_expansion(n, expansion):
-
-    if n == 1:
-        return 1 / 2
-    else:
-        expansion = 1 / (2 + get_expansion(n - 1, expansion))
-
-    return expansion
-
-
-def first_try():
-
-    larger_numerator = 0
-    for n in range(1, 4):
-
-        expansion = 1 + get_expansion(n, 1)
-        res = fractions.Fraction(expansion).limit_denominator()
-
-        if len(str(res.numerator)) > len(str(res.denominator)):
-            larger_numerator += 1
-
-        print(n, expansion, res.numerator, res.denominator)
-
-    print(larger_numerator)
-
-
 if __name__ == "__main__":
-    pass
+
+    actual_numerator = 1
+    actual_denominator = 1
+
+    last_numerator = 1
+    last_denominator = 1
+
+    numerator_exceeds = 0
+
+    for n in range(1, 1001):
+
+        actual_numerator = 2 * last_denominator + last_numerator
+        actual_denominator = last_denominator + last_numerator
+
+        # print("#", n)
+        # print(actual_numerator, "/", actual_denominator)
+        # print(last_numerator, "/", last_denominator)
+
+        last_numerator = actual_numerator
+        last_denominator = actual_denominator
+
+        if len(str(actual_numerator)) > len(str(last_denominator)):
+            numerator_exceeds += 1
+
+    print("Numerator exceeds", numerator_exceeds)
